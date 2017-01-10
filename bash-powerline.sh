@@ -89,6 +89,7 @@ __powerline() {
         printf " $GIT_BRANCH_SYMBOL$branch$marks "
     }
 
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
@@ -98,9 +99,15 @@ __powerline() {
             local BG_EXIT="$BG_RED"
         fi
 
-        PS1="$BG_BASE1$FG_BASE3 \w $RESET"
+        if test -z "$VIRTUAL_ENV" ; then
+            PYTHON_VIRTUALENV=""
+          else
+            PYTHON_VIRTUALENV="(`basename \"$VIRTUAL_ENV\"`) "
+        fi
+
+        PS1="$BG_BASE1$FG_BASE3 \W $RESET"
         PS1+="$BG_BLUE$FG_BASE3$(__git_info)$RESET"
-        PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
+        PS1+="$BG_EXIT$FG_BASE3 $PYTHON_VIRTUALENV$PS_SYMBOL $RESET "
     }
 
     PROMPT_COMMAND=ps1
