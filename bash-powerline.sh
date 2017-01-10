@@ -3,7 +3,7 @@
 __powerline() {
 
     # Unicode symbols
-    readonly PS_SYMBOL_DARWIN=''
+    readonly PS_SYMBOL_DARWIN='λ'
     readonly PS_SYMBOL_LINUX='$'
     readonly PS_SYMBOL_OTHER='%'
     readonly GIT_BRANCH_SYMBOL='⑂ '
@@ -102,12 +102,13 @@ __powerline() {
         if test -z "$VIRTUAL_ENV" ; then
             PYTHON_VIRTUALENV=""
           else
-            PYTHON_VIRTUALENV="(`basename \"$VIRTUAL_ENV\"`) "
+            PYTHON_VIRTUALENV=" `basename \"$VIRTUAL_ENV\"` "
         fi
 
         PS1="$BG_BASE1$FG_BASE3 \W $RESET"
         PS1+="$BG_BLUE$FG_BASE3$(__git_info)$RESET"
-        PS1+="$BG_EXIT$FG_BASE3 $PYTHON_VIRTUALENV$PS_SYMBOL $RESET "
+        PS1+="$BG_CYAN$FG_BASE3$PYTHON_VIRTUALENV$RESET"
+        PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
     }
 
     PROMPT_COMMAND=ps1
